@@ -21,9 +21,9 @@ export const pokemonsReducer = (state = initialState, action) => {
   }
 }
 
-export const setPokemonsDataAction = (payload) => ({type: SETPOKEMON, payload});
-export const resetPokemonsDataAction = () => ({type: RESETPOKEMON});
-export const setPokemonStatsAction = (payload) => ({type: SETSTATS, payload});
-export const fetchPokemonsAction = () => ({type:FETCHPOKEMON});
+export const setPoke = (payload) => ({type: SETPOKEMON, payload});
+export const resPoke = () => ({type: RESETPOKEMON});
+export const setStats = (payload) => ({type: SETSTATS, payload});
+export const fetchPoke = () => ({type:FETCHPOKEMON});
 
 

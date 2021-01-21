@@ -21,9 +21,9 @@ export function evolutionReducer (state = initialState, action) {
   }
 }
 
-export const setPokemonEvolutionAction = (payload) => ({type: SETEVOLUTION, payload});
-export const resetPokemonsEvolutionAction = () => ({type: RESETEVOLUTION});
-export const setPokemonEvolutionStatsAction = (payload) => ({type: SETEVOLSTATS, payload});
-export const fetchEvolutionAction = () => ({type:FETCHEVOLUTION});
+export const setEvo = (payload) => ({type: SETEVOLUTION, payload});
+export const resEvo = () => ({type: RESETEVOLUTION});
+export const setEvoStats = (payload) => ({type: SETEVOLSTATS, payload});
+export const fetchEvo = () => ({type:FETCHEVOLUTION});
 
 

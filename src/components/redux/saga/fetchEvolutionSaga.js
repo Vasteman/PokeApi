@@ -1,5 +1,5 @@
 import {put,takeEvery,call} from 'redux-saga/effects';
-import {FETCHEVOLUTION, setPokemonEvolutionAction, setPokemonEvolutionStatsAction} from '../store/evolutionReducer';
+import {FETCHEVOLUTION, setEvo, setEvoStats} from '../store/evolutionReducer';
 import {getPokemon,getPokemonStats} from './fetchPokeSaga';
 import {id} from '../../../App'
 
@@ -11,8 +11,8 @@ function* evolutionWorker() {
   const evoId = yield call(firstEvoId,id)
   const data = yield call(getPokemon,evoId)
   const stats = yield call(getPokemonStats,evoId)
-  yield put(setPokemonEvolutionAction(data))
-  yield put(setPokemonEvolutionStatsAction(stats))
+  yield put(setEvo(data))
+  yield put(setEvoStats(stats))
 }
 
 export function* evolutionWatcher() {

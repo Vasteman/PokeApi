@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchPokemonsAction,resetPokemonsDataAction } from './components/redux/store/pokemonsReducer';
-import {fetchEvolutionAction,resetPokemonsEvolutionAction} from './components/redux/store/evolutionReducer';
+import { fetchPoke,resPoke } from './components/redux/store/pokemonsReducer';
+import { fetchEvo,resEvo } from './components/redux/store/evolutionReducer';
 
 export let id = 0;
 export function randomId (){
@@ -13,7 +13,7 @@ export function randomId (){
 function App(props) {
 
   const {
-    disabledPoke,
+    disabledPokeButton,
     disabledEvolButton,
     pokemon,
     stats,
@@ -37,7 +37,7 @@ function App(props) {
 
     return (
       <div>
-        <button disabled={disabledPoke} onClick={fetchPoke}>SetPokemon</button>
+        <button disabled={disabledPokeButton} onClick={fetchPoke}>Set Pokemon</button>
         <button onClick={()=>reset()}>Reset Pokemon</button>
       <div>
         {poke?.map(poke=><li key={poke}>{poke[0]}: {poke[1]}</li>)}
@@ -58,7 +58,7 @@ function App(props) {
 
 let mapStateToProps = (state) => {
   return {
-    disabledPoke: state.pokemon.disabledButton,
+    disabledPokeButton: state.pokemon.disabledButton,
     disabledEvolButton: state.firstEvol.disabledButton,
     pokemon: state.pokemon.pokemons[0],
     stats: state.pokemon.stats[0],
@@ -67,14 +67,12 @@ let mapStateToProps = (state) => {
   }
 }
 
-let mapDispatchToProps = (dispatch) => {
-  return {
-      fetchPoke: () => dispatch(fetchPokemonsAction()),
-      fetchEvo: () => dispatch(fetchEvolutionAction()),
-      resPoke: () => dispatch(resetPokemonsDataAction()),
-      resEvo: () => dispatch(resetPokemonsEvolutionAction())
+let mapDispatchToProps = {
+    fetchPoke,
+    fetchEvo,
+    resPoke,
+    resEvo
   }
-}
 
 export default connect(mapStateToProps,mapDispatchToProps)(App);
 

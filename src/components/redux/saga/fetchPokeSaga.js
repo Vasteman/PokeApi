@@ -1,5 +1,5 @@
 import {put,takeEvery,call} from 'redux-saga/effects';
-import {setPokemonsDataAction, setPokemonStatsAction, FETCHPOKEMON} from '../store/pokemonsReducer';
+import {setPoke, setStats, FETCHPOKEMON} from '../store/pokemonsReducer';
 import {randomId} from '../../../App'
 
 export const _apiBase = 'https://pokeapi.co/api/v2/'
@@ -51,8 +51,8 @@ function* fetchPokemonsWorker() {
   const id =  yield call(randomId)
   const data = yield call(getPokemon,id)
   const stats = yield call(getPokemonStats,id)
-  yield put(setPokemonsDataAction(data))
-  yield put(setPokemonStatsAction(stats))
+  yield put(setPoke(data))
+  yield put(setStats(stats))
 }
 
 export function* fetchPokemonsWatcher() {
