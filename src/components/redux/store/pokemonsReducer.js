@@ -3,7 +3,6 @@ const RESETPOKEMON = 'RESET_POKEMON';
 const SETSTATS = 'SET_STATS';
 export const FETCHPOKEMON = 'FETCH_POKEMON';
 
-
 const initialState = {
   pokemons: [],
   stats: [],
@@ -21,8 +20,6 @@ export const pokemonsReducer = (state = initialState, action) => {
     default: return state;
   }
 }
-
-
 
 export const setPokemonsDataAction = (payload) => ({type: SETPOKEMON, payload});
 export const resetPokemonsDataAction = () => ({type: RESETPOKEMON});

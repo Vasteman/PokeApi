@@ -12,7 +12,6 @@ export const rootReducer = combineReducers({
  firstEvol: evolutionReducer
 })
 
- 
 export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleware))); 
 
 sagaMiddleware.run(rootWatcher)

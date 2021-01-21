@@ -9,7 +9,6 @@ const initialState = {
   disabledEvolButton: false
 }
 
-
 export function evolutionReducer (state = initialState, action) {
   switch(action.type){
     case SETEVOLUTION:
@@ -21,8 +20,6 @@ export function evolutionReducer (state = initialState, action) {
     default: return state;
   }
 }
-
-
 
 export const setPokemonEvolutionAction = (payload) => ({type: SETEVOLUTION, payload});
 export const resetPokemonsEvolutionAction = () => ({type: RESETEVOLUTION});

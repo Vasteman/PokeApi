@@ -2,13 +2,10 @@ import {put,takeEvery,call} from 'redux-saga/effects';
 import {FETCHEVOLUTION, setPokemonEvolutionAction, setPokemonEvolutionStatsAction} from '../store/evolutionReducer';
 import {getPokemon,getPokemonStats} from './fetchPokeSaga';
 import {id} from '../../../App'
-import { useSelector } from "react-redux";
 
 function firstEvoId(id){
   return id+1
 }
-
-
 
 function* evolutionWorker() {
   const evoId = yield call(firstEvoId,id)

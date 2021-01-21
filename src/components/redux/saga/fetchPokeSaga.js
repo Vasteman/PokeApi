@@ -12,7 +12,6 @@ export async function getRes (url) {
   return await res.json();
 }
 
-
 export async function getPokemon (id) {
   const data = await getRes(`pokemon/${id}/`)
   const newData = transformPokemon(data)
@@ -24,7 +23,6 @@ export async function getPokemonStats (id) {
   const newStats = transformPokemonStats(stats)
   return newStats
 }
-
 
 const transformPokemon = (data) => {
   return{
