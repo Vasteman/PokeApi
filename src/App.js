@@ -39,19 +39,25 @@ function App(props) {
       <div>
         <button disabled={disabledPokeButton} onClick={fetchPoke}>Set Pokemon</button>
         <button onClick={()=>reset()}>Reset Pokemon</button>
-      <div>
-        {poke?.map(poke=><li key={poke}>{poke[0]}: {poke[1]}</li>)}
-        {pokemon && <img src={pokemon.imgFront} alt='pokemon front'></img>}
-        {pokemon && <img src={pokemon.imgBack} alt='pokemon front'></img>}
-      <ul>
-        {stat?.map(stat=><li key={stat}>{stat[0]}: {stat[1]}</li>)}
-        {stat && <button disabled={disabledEvolButton} onClick={fetchEvo}>Get Evolution</button>}
-        {evol?.map(evol=><li key={evol}>{evol[0]}: {evol[1]}</li>)}
-        {evolution && <img src={evolution.imgFront} alt='pokemon front'></img>}
-        {evolution && <img src={evolution.imgBack} alt='pokemon front'></img>}
-        {evolStat?.map(stat=><li key={stat}>{stat[0]}: {stat[1]}</li>)}
-      </ul>
-      </div>
+        <div>
+          <ul>
+              {poke?.map(poke=><li key={poke}>{poke[0]}: {poke[1]}</li>)}
+          </ul>
+            {pokemon && <img src={pokemon.imgFront} alt='pokemon front'></img>}
+            {pokemon && <img src={pokemon.imgBack} alt='pokemon front'></img>}
+          <ul>
+            {stat?.map(stat=><li key={stat}>{stat[0]}: {stat[1]}</li>)}
+          </ul>
+            {stat && <button disabled={disabledEvolButton} onClick={fetchEvo}>Get Evolution</button>}
+          <ul>
+            {evol?.map(evol=><li key={evol}>{evol[0]}: {evol[1]}</li>)}
+          </ul>
+            {evolution && <img src={evolution.imgFront} alt='pokemon front'></img>}
+            {evolution && <img src={evolution.imgBack} alt='pokemon front'></img>}
+          <ul>
+            {evolStat?.map(stat=><li key={stat}>{stat[0]}: {stat[1]}</li>)}
+          </ul>
+        </div>
       </div>
     ) 
 }
