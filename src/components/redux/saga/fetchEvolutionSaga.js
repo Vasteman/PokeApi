@@ -1,20 +1,23 @@
 import {put,takeEvery,call} from 'redux-saga/effects';
-import {FETCHEVOLUTION, setEvo, setEvoStats} from '../store/evolutionReducer';
+import {FETCHEVOLUTION,FETCHNEXTEVOLUTION, setEvo, setEvoStats, setNext,setNextStats} from '../store/evolutionReducer';
 import {getPokemon,getPokemonStats} from './fetchPokeSaga';
-import {id} from '../../../App'
 
-function firstEvoId(id){
-  return id+1
-}
-
-function* evolutionWorker() {
-  const evoId = yield call(firstEvoId,id)
-  const data = yield call(getPokemon,evoId)
-  const stats = yield call(getPokemonStats,evoId)
+function* evolutionWorker({ payload }) {
+  const data = yield call(getPokemon,payload.id+1)
+  const stats = yield call(getPokemonStats,payload.id+1)
   yield put(setEvo(data))
   yield put(setEvoStats(stats))
 }
 
+function* nextEvolutionWorker({ payload }) {
+  const data = yield call(getPokemon,payload.id+2)
+  const stats = yield call(getPokemonStats,payload.id+2)
+  yield put(setNext(data))
+  yield put(setNextStats(stats))
+}
+
+
 export function* evolutionWatcher() {
-  yield takeEvery(FETCHEVOLUTION, evolutionWorker)
+  yield takeEvery(FETCHEVOLUTION, evolutionWorker);
+  yield takeEvery(FETCHNEXTEVOLUTION,nextEvolutionWorker);
 }

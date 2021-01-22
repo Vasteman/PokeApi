@@ -5,16 +5,15 @@ export const FETCHPOKEMON = 'FETCH_POKEMON';
 
 const initialState = {
   pokemons: [],
-  stats: [],
-  disabledButton: false
+  stats: []
 }
 
 export const pokemonsReducer = (state = initialState, action) => {
   switch(action.type){
     case SETPOKEMON:
-      return {...state, pokemons: [...state.pokemons, action.payload], disabledButton: true }
+      return {...state, pokemons: [...state.pokemons, action.payload]}
     case RESETPOKEMON:
-      return {...state, pokemons: [], stats: [], disabledButton: false}
+      return {...state, pokemons: [], stats: []}
     case SETSTATS:
       return {...state, stats: [...state.stats, action.payload]}
     default: return state;
@@ -24,6 +23,6 @@ export const pokemonsReducer = (state = initialState, action) => {
 export const setPoke = (payload) => ({type: SETPOKEMON, payload});
 export const resPoke = () => ({type: RESETPOKEMON});
 export const setStats = (payload) => ({type: SETSTATS, payload});
-export const fetchPoke = () => ({type:FETCHPOKEMON});
+export const fetchPoke = (payload) => ({type:FETCHPOKEMON, payload});
 
 

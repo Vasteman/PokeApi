@@ -4,6 +4,7 @@ import {randomId} from '../../../App'
 
 export const _apiBase = 'https://pokeapi.co/api/v2/'
 
+
 export async function getRes (url) {
   const res = await fetch(`${_apiBase}${url}`);
   if(!res.ok){
@@ -47,10 +48,9 @@ const transformPokemonStats = (data) => {
   }
 }
 
-function* fetchPokemonsWorker() {
-  const id =  yield call(randomId)
-  const data = yield call(getPokemon,id)
-  const stats = yield call(getPokemonStats,id)
+function* fetchPokemonsWorker({ payload }) {
+  const data = yield call(getPokemon, payload.id)
+  const stats = yield call(getPokemonStats,payload.id)
   yield put(setPoke(data))
   yield put(setStats(stats))
 }
