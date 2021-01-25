@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchPoke,resPoke } from './components/redux/store/pokemonsReducer';
-import { fetchEvo,resEvo,fetchNext } from './components/redux/store/evolutionReducer';
-import {fetchAll} from './components/redux/store/allPokemonsReducer'
+import { fetchPokemon,resetPokemon } from './reducers/pokemonsReducer';
+import { fetchEvolution,resetEvolution,fetchNextEvolution } from './reducers/evolutionPokemonsReducer';
+import {fetchAllPokemons} from './reducers/allPokemonsReducer'
 
 
 function App(props) {
@@ -12,13 +12,13 @@ function App(props) {
     stats,
     evolution,
     evolutionStats,
-    resPoke,
-    resEvo,
-    fetchPoke,
-    fetchEvo,
-    fetchAll,
+    resetPokemon,
+    resetEvolution,
+    fetchPokemon,
+    fetchEvolution,
+    fetchAllPokemons,
     allPoke,
-    fetchNext,
+    fetchNextEvolution,
     next,
     nextStat
   } = props
@@ -30,19 +30,16 @@ function App(props) {
     const nextEvo = next && Object.entries(next).slice(1,4)
     const nextEvoStat = nextStat && Object.entries(nextStat)
 
-console.log('nextEvo',nextEvo);
-console.log('nextEvoStat',nextEvoStat);
-
     const reset = () => {
-      resPoke();
-      resEvo();
+      resetPokemon();
+      resetEvolution();
     }
 
     return (
       <div>
-        <button onClick={fetchAll}>Set Poke-list</button>
-        <button onClick={()=>reset()}>Reset Pokemon</button>
-        {allPoke && <ul>{allPoke.map(el=><li key={el.id} onClick={() => fetchPoke({id: el.id})}>{el.name}</li>)}</ul>}
+        <button onClick={fetchAllPokemons}>Set Poke-list</button>
+        <button onClick={reset}>Reset Pokemon</button>
+        {allPoke && <ul>{allPoke.map(el=><li key={el.id} onClick={() => fetchPokemon({id: el.id})}>{el.name}</li>)}</ul>}
         <div>
           <ul>
               {poke?.map(poke=><li key={poke}>{poke[0]}: {poke[1]}</li>)}
@@ -52,7 +49,7 @@ console.log('nextEvoStat',nextEvoStat);
           <ul>
             {stat?.map(stat=><li key={stat}>{stat[0]}: {stat[1]}</li>)}
           </ul>
-            {stat && <button  onClick={()=>fetchEvo({id:pokemon.id})}>Get Evolution</button>}
+            {stat && <button  onClick={()=>fetchEvolution({id:pokemon.id})}>Get Evolution</button>}
           <ul>
             {evol?.map(evol=><li key={evol}>{evol[0]}: {evol[1]}</li>)}
           </ul>
@@ -61,7 +58,7 @@ console.log('nextEvoStat',nextEvoStat);
           <ul>
             {evolStat?.map(stat=><li key={stat}>{stat[0]}: {stat[1]}</li>)}
           </ul>
-          {evolStat && <button  onClick={()=>fetchNext({id:pokemon.id})}>Get Evolution</button>}
+          {evolStat && <button  onClick={()=>fetchNextEvolution({id:pokemon.id})}>Get Evolution</button>}
           <ul>
             {nextEvo?.map(evol=><li key={evol}>{evol[0]}: {evol[1]}</li>)}
           </ul>
@@ -77,24 +74,24 @@ console.log('nextEvoStat',nextEvoStat);
 
 let mapStateToProps = (state) => {
   return {
-    disabledEvolButton: state.firstEvol.disabledButton,
+    disabledEvolButton: state.evolution.disabledButton,
     pokemon: state.pokemon.pokemons[0],
     stats: state.pokemon.stats[0],
-    evolution: state.firstEvol.evolution[0],
-    evolutionStats: state.firstEvol.evolutionStats[0],
-    allPoke: state.allPoke.allPoke[0],
-    next: state.firstEvol.nextEvolution[0],
-    nextStat:state.firstEvol.nextEvolutionStats[0]
+    evolution: state.evolution.evolution[0],
+    evolutionStats: state.evolution.evolutionStats[0],
+    allPoke: state.allPokemons.allPoke[0],
+    next: state.evolution.nextEvolution[0],
+    nextStat:state.evolution.nextEvolutionStats[0]
   }
 }
 
 let mapDispatchToProps = {
-    fetchAll,
-    fetchPoke,
-    fetchEvo,
-    resPoke,
-    resEvo,
-    fetchNext
+    fetchAllPokemons,
+    fetchPokemon,
+    fetchEvolution,
+    resetPokemon,
+    resetEvolution,
+    fetchNextEvolution
   }
 
 export default connect(mapStateToProps,mapDispatchToProps)(App);

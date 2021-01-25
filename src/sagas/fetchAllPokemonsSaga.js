@@ -1,6 +1,6 @@
 import {put,takeEvery,call} from 'redux-saga/effects';
-import {FETCHALL,setAll} from '../store/allPokemonsReducer'
-import {getRes} from './fetchPokeSaga'
+import {FETCH_ALL_POKEMONS,setAllPokemons} from '../reducers/allPokemonsReducer'
+import {getRes} from './fetchPokemonSaga'
 
 async function getAllPokemon(){
   const data = await getRes('pokemon/?limit=16')
@@ -10,9 +10,9 @@ async function getAllPokemon(){
 
 function* allPokeWorker() {
   const data = yield call(getAllPokemon)
-  yield put(setAll(data))
+  yield put(setAllPokemons(data))
 }
 
 export function* allPokeWatcher() {
-  yield takeEvery(FETCHALL, allPokeWorker)
+  yield takeEvery(FETCH_ALL_POKEMONS, allPokeWorker)
 }
