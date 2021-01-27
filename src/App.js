@@ -1,21 +1,19 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchPokemon,resetPokemon } from './reducers/pokemonsReducer';
-import { fetchEvolution,resetEvolution,fetchNextEvolution } from './reducers/evolutionPokemonsReducer';
-import {fetchAllPokemons} from './reducers/allPokemonsReducer'
-
+import { fetchPokemon, resetPokemon } from './reducers/pokemonsReducer';
+import { resetEvolution, fetchNextEvolution } from './reducers/evolutionPokemonsReducer';
+import { fetchAllPokemons } from './reducers/allPokemonsReducer'
+import PokemonContainer from './containers/pokemonContainer' 
 
 function App(props) {
 
   const {
     pokemon,
-    stats,
     evolution,
     evolutionStats,
     resetPokemon,
     resetEvolution,
     fetchPokemon,
-    fetchEvolution,
     fetchAllPokemons,
     allPoke,
     fetchNextEvolution,
@@ -23,8 +21,6 @@ function App(props) {
     nextStat
   } = props
   
-    const poke = pokemon && Object.entries(pokemon).slice(1,4)
-    const stat = stats && Object.entries(stats)
     const evol = evolution && Object.entries(evolution).slice(1,4)
     const evolStat = evolutionStats && Object.entries(evolutionStats)
     const nextEvo = next && Object.entries(next).slice(1,4)
@@ -40,16 +36,8 @@ function App(props) {
         <button onClick={fetchAllPokemons}>Set Poke-list</button>
         <button onClick={reset}>Reset Pokemon</button>
         {allPoke && <ul>{allPoke.map(el=><li key={el.id} onClick={() => fetchPokemon({id: el.id})}>{el.name}</li>)}</ul>}
+        <PokemonContainer />
         <div>
-          <ul>
-              {poke?.map(poke=><li key={poke}>{poke[0]}: {poke[1]}</li>)}
-          </ul>
-            {pokemon && <img src={pokemon.imgFront} alt='pokemon front'></img>}
-            {pokemon && <img src={pokemon.imgBack} alt='pokemon front'></img>}
-          <ul>
-            {stat?.map(stat=><li key={stat}>{stat[0]}: {stat[1]}</li>)}
-          </ul>
-            {stat && <button  onClick={()=>fetchEvolution({id:pokemon.id})}>Get Evolution</button>}
           <ul>
             {evol?.map(evol=><li key={evol}>{evol[0]}: {evol[1]}</li>)}
           </ul>
@@ -88,7 +76,6 @@ let mapStateToProps = (state) => {
 let mapDispatchToProps = {
     fetchAllPokemons,
     fetchPokemon,
-    fetchEvolution,
     resetPokemon,
     resetEvolution,
     fetchNextEvolution

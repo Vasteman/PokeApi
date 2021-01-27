@@ -1,5 +1,5 @@
-import {put,takeEvery,call} from 'redux-saga/effects';
-import {setPokemon, setPokemonStats, FETCH_POKEMON} from '../reducers/pokemonsReducer';
+import { put, takeEvery, call } from 'redux-saga/effects';
+import { setPokemon, setPokemonStats, FETCH_POKEMON } from '../reducers/pokemonsReducer';
 
 export const _apiBase = 'https://pokeapi.co/api/v2/'
 

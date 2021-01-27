@@ -8,7 +8,7 @@ const initialState = {
 export function allPokemonsReducer (state = initialState, action) {
   switch(action.type){
     case SET_ALL_POKEMONS:
-      return {...state, allPoke: [...state.allPoke,action.payload]}
+      return {...state, allPoke: [...state.allPoke, action.payload]}
     default: return state;
   }
 }
