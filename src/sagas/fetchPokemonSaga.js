@@ -1,12 +1,11 @@
-import { put, takeEvery, call } from 'redux-saga/effects';
-import { setPokemon, setPokemonStats, FETCH_POKEMON } from '../reducers/pokemonsReducer';
-
-export const _apiBase = 'https://pokeapi.co/api/v2/'
+import { put, call } from 'redux-saga/effects';
+import { requestPokemonSucceeded, requestPokemonStats, requestPokemonError } from '../reducers/pokemonsReducer';
+import { _apiBase } from '../constants/apiPath'
 
 export async function getRes (url) {
   const res = await fetch(`${_apiBase}${url}`);
   if(!res.ok){
-    throw new Error(`could not fetch ${url}`)
+    throw new Error(`Сould not fetch ${_apiBase}${url}, ResponseStatus ${res.status}`)
   }
   return await res.json();
 }
@@ -46,13 +45,14 @@ const transformPokemonStats = (data) => {
   }
 }
 
-function* fetchPokemonsWorker({ payload }) {
-  const data = yield call(getPokemon, payload.id)
-  const stats = yield call(getPokemonStats,payload.id)
-  yield put(setPokemon(data))
-  yield put(setPokemonStats(stats))
-}
-
-export function* fetchPokemonsWatcher() {
-  yield takeEvery(FETCH_POKEMON, fetchPokemonsWorker)
+export function* fetchPokemonsSaga({ payload }) {
+    try {
+    const data = yield call(getPokemon, payload.id)
+    const stats = yield call(getPokemonStats,payload.id)
+    yield put(requestPokemonSucceeded(data))
+    yield put(requestPokemonStats(stats))
+    } catch (error) {
+      console.log('message',error.message);
+      yield put (requestPokemonError(error.message))
+    }
 }

@@ -1,5 +1,5 @@
-import {put, takeEvery, call } from 'redux-saga/effects';
-import {getPokemon, getPokemonStats } from './fetchPokemonSaga';
+import { put, takeEvery, call } from 'redux-saga/effects';
+import { getPokemon, getPokemonStats } from './fetchPokemonSaga';
 import { FETCH_EVOLUTION,
          FETCH_NEXT_EVOLUTION, 
          setEvolution, 
@@ -15,8 +15,8 @@ function* evolutionWorker({ payload }) {
 }
 
 function* nextEvolutionWorker({ payload }) {
-  const data = yield call(getPokemon, payload.id+2)
-  const stats = yield call(getPokemonStats, payload.id+2)
+  const data = yield call(getPokemon, payload.id+1)
+  const stats = yield call(getPokemonStats, payload.id+1)
   yield put(setNextEvolution(data))
   yield put(setNextEvolutionStats(stats))
 }

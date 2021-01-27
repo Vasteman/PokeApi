@@ -34,7 +34,7 @@ export function evolutionReducer (state = initialState, action) {
   }
 }
 
-export const fetchEvolution = (payload) => ({ type:FETCH_EVOLUTION, payload });
+export const fetchEvolution = (payload) => ({ type: FETCH_EVOLUTION, payload });
 export const fetchNextEvolution = (payload) => ({ type: FETCH_NEXT_EVOLUTION, payload });
 export const setEvolution = (payload) => ({ type: SET_EVOLUTION, payload });
 export const resetEvolution = () => ({ type: RESET_EVOLUTION });
