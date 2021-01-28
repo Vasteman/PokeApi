@@ -18,8 +18,12 @@ const Page = (props) => {
 
   return (
     <div>
-      <button onClick={requestAllPokemons}>Request Pokemon-list</button>
-      <button onClick={reset}>Reset Pokemon</button>
+      <button className="btn btn-success" onClick={requestAllPokemons}>
+        Request Pokemon-list
+      </button>
+      <button className="btn btn-danger" onClick={reset}>
+        Reset Pokemon
+      </button>
       <PokemonList allPokemons={allPokemons} requestPokemon={requestPokemon} />
       <PokemonContainer />
     </div>

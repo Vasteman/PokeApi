@@ -6,9 +6,13 @@ const PokemonList = (props) => {
   return (
     <div>
       {allPokemons && (
-        <ul>
+        <ul className="list-group mt-3" style={{ width: "20%" }}>
           {allPokemons.map((el) => (
-            <li key={el.id} onClick={() => requestPokemon({ id: el.id })}>
+            <li
+              className="btn list-group-item list-group-item-action pointer"
+              key={el.id}
+              onClick={() => requestPokemon({ id: el.id })}
+            >
               {el.name}
             </li>
           ))}
