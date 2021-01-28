@@ -12,8 +12,8 @@ import {
 export function* rootWatcher() {
   yield all([
     takeEvery(REQUEST_POKEMON, fetchPokemonsSaga),
-    yield takeEvery(REQUEST_EVOLUTION, evolutionSaga),
-    yield takeEvery(REQUEST_NEXT_EVOLUTION, nextEvolutionSaga),
+    takeEvery(REQUEST_EVOLUTION, evolutionSaga),
+    takeEvery(REQUEST_NEXT_EVOLUTION, nextEvolutionSaga),
     takeEvery(REQUEST_ALL_POKEMONS, allPokemonsSaga),
   ]);
 }

@@ -3,7 +3,7 @@ import {
   requestAllPokemonsSucceeded,
   requestAllPokemonsError,
 } from "../reducers/allPokemonsReducer";
-import { getRes } from "./fetchPokemonSaga";
+import { getRes } from "../utils/GetPokemons";
 
 async function getAllPokemon() {
   const data = await getRes("pokemon/?limit=16");

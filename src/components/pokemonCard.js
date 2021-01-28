@@ -10,8 +10,8 @@ const PokemonCard = (props) => {
         <li>Height: {pokemon?.height}</li>
         <li>Weight: {pokemon?.weight}</li>
       </ul>
-      <img src={pokemon?.imgFront} alt=""></img>
-      <img src={pokemon?.imgBack} alt=""></img>
+      <img src={pokemon?.imgFront} alt="Pokemon front"></img>
+      <img src={pokemon?.imgBack} alt="Pokemon back"></img>
       <ul>
         <li>Attack: {stats?.attack}</li>
         <li>Defense: {stats?.defense}</li>

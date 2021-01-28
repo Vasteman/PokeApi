@@ -1,5 +1,5 @@
 import { put, call } from "redux-saga/effects";
-import { getPokemon, getPokemonStats } from "./fetchPokemonSaga";
+import { getPokemon, getPokemonStats } from "../utils/GetPokemons";
 import {
   setEvolution,
   setEvolutionStats,

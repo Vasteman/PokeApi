@@ -47,17 +47,17 @@ export const pokemonsReducer = (state = initialState, action) => {
   }
 };
 
+export const requestPokemon = (payload) => ({ type: REQUEST_POKEMON, payload });
 export const requestPokemonSucceeded = (payload) => ({
   type: REQUEST_POKEMON_SUCCEEDED,
+  payload,
+});
+export const requestPokemonError = (payload) => ({
+  type: REQUEST_POKEMON_ERROR,
   payload,
 });
 export const resetPokemon = () => ({ type: RESET_POKEMON });
 export const requestPokemonStats = (payload) => ({
   type: REQUEST_POKEMON_STATS,
-  payload,
-});
-export const requestPokemon = (payload) => ({ type: REQUEST_POKEMON, payload });
-export const requestPokemonError = (payload) => ({
-  type: REQUEST_POKEMON_ERROR,
   payload,
 });
