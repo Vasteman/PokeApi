@@ -1,26 +1,41 @@
-import React from 'react';
-import PokemonCard from '../../components/pokemonCard'
+import React from "react";
+import PokemonCard from "../../components/pokemonCard";
 
 const PokemonCardContainer = (props) => {
-
-  const { 
-    pokemon, 
-    stats, 
-    evolution, 
+  const {
+    pokemon,
+    stats,
+    evolution,
     fetchEvolution,
     evolutionStats,
     fetchNextEvolution,
     next,
-    nextStat
-  } = props 
+    nextStat,
+  } = props;
 
-    return (
+  return (
     <div>
-      <div>{pokemon && <PokemonCard stats={stats} pokemon={pokemon} fetchEvolution={fetchEvolution}/>}</div>
-      <div>{evolution && <PokemonCard stats={evolutionStats} pokemon={evolution} fetchEvolution={fetchNextEvolution}/>}</div>
-      <div>{next && <PokemonCard stats={nextStat} pokemon={next}/>}</div>
+      <div>
+        {pokemon && (
+          <PokemonCard
+            stats={stats}
+            pokemon={pokemon}
+            fetchEvolution={fetchEvolution}
+          />
+        )}
+      </div>
+      <div>
+        {evolution && (
+          <PokemonCard
+            stats={evolutionStats}
+            pokemon={evolution}
+            fetchEvolution={fetchNextEvolution}
+          />
+        )}
+      </div>
+      <div>{next && <PokemonCard stats={nextStat} pokemon={next} />}</div>
     </div>
-    )
+  );
 };
 
 export default PokemonCardContainer;
