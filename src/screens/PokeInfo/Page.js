@@ -1,30 +1,29 @@
-import React from 'react';
+import React from "react";
 import PokemonContainer from "../../containers/PokemonContainer/index";
-import PokemonList from '../../components/pokemonList'
+import PokemonList from "../../components/pokemonList";
 
 const Page = (props) => {
-
-  const { 
+  const {
     requestAllPokemons,
     resetPokemon,
     resetEvolution,
     requestPokemon,
-    allPoke
-  } = props
+    allPokemons,
+  } = props;
 
   const reset = () => {
     resetPokemon();
     resetEvolution();
-  }
+  };
 
   return (
     <div>
       <button onClick={requestAllPokemons}>Request Pokemon-list</button>
       <button onClick={reset}>Reset Pokemon</button>
-      <PokemonList allPoke={allPoke} requestPokemon={requestPokemon}  />
+      <PokemonList allPokemons={allPokemons} requestPokemon={requestPokemon} />
       <PokemonContainer />
     </div>
-  )
-}
+  );
+};
 
-export default Page
+export default Page;

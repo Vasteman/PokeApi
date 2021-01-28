@@ -1,13 +1,13 @@
 import React from "react";
 
 const PokemonList = (props) => {
-  const { allPoke, requestPokemon } = props;
+  const { allPokemons, requestPokemon } = props;
 
   return (
     <div>
-      {allPoke && (
+      {allPokemons && (
         <ul>
-          {allPoke.map((el) => (
+          {allPokemons.map((el) => (
             <li key={el.id} onClick={() => requestPokemon({ id: el.id })}>
               {el.name}
             </li>

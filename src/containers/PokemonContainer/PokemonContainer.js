@@ -6,11 +6,11 @@ const PokemonCardContainer = (props) => {
     pokemon,
     stats,
     evolution,
-    fetchEvolution,
     evolutionStats,
+    nextEvolution,
+    nextEvolutionStats,
+    fetchEvolution,
     fetchNextEvolution,
-    next,
-    nextStat,
   } = props;
 
   return (
@@ -33,7 +33,11 @@ const PokemonCardContainer = (props) => {
           />
         )}
       </div>
-      <div>{next && <PokemonCard stats={nextStat} pokemon={next} />}</div>
+      <div>
+        {nextEvolution && (
+          <PokemonCard stats={nextEvolutionStats} pokemon={nextEvolution} />
+        )}
+      </div>
     </div>
   );
 };
