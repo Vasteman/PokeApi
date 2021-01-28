@@ -9,8 +9,8 @@ const PokemonCardContainer = (props) => {
     evolutionStats,
     nextEvolution,
     nextEvolutionStats,
-    fetchEvolution,
-    fetchNextEvolution,
+    requestEvolution,
+    requestNextEvolution,
   } = props;
 
   return (
@@ -20,7 +20,7 @@ const PokemonCardContainer = (props) => {
           <PokemonCard
             stats={stats}
             pokemon={pokemon}
-            fetchEvolution={fetchEvolution}
+            requestEvolution={requestEvolution}
           />
         )}
       </div>
@@ -29,7 +29,7 @@ const PokemonCardContainer = (props) => {
           <PokemonCard
             stats={evolutionStats}
             pokemon={evolution}
-            fetchEvolution={fetchNextEvolution}
+            requestEvolution={requestNextEvolution}
           />
         )}
       </div>

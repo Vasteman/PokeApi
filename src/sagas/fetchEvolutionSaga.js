@@ -5,18 +5,28 @@ import {
   setEvolutionStats,
   setNextEvolution,
   setNextEvolutionStats,
+  requestEvolutionError,
+  requestNextEvolutionError,
 } from "../reducers/evolutionPokemonsReducer";
 
 export function* evolutionSaga({ payload }) {
-  const data = yield call(getPokemon, payload.id + 1);
-  const stats = yield call(getPokemonStats, payload.id + 1);
-  yield put(setEvolution(data));
-  yield put(setEvolutionStats(stats));
+  try {
+    const data = yield call(getPokemon, payload.id + 1);
+    const stats = yield call(getPokemonStats, payload.id + 1);
+    yield put(setEvolution(data));
+    yield put(setEvolutionStats(stats));
+  } catch (error) {
+    yield put(requestEvolutionError(error.message));
+  }
 }
 
 export function* nextEvolutionSaga({ payload }) {
-  const data = yield call(getPokemon, payload.id + 1);
-  const stats = yield call(getPokemonStats, payload.id + 1);
-  yield put(setNextEvolution(data));
-  yield put(setNextEvolutionStats(stats));
+  try {
+    const data = yield call(getPokemon, payload.id + 1);
+    const stats = yield call(getPokemonStats, payload.id + 1);
+    yield put(setNextEvolution(data));
+    yield put(setNextEvolutionStats(stats));
+  } catch (error) {
+    yield put(requestNextEvolutionError(error.message));
+  }
 }

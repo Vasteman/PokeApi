@@ -1,7 +1,7 @@
 import React from "react";
 
 const PokemonCard = (props) => {
-  const { pokemon, stats, fetchEvolution } = props;
+  const { pokemon, stats, requestEvolution } = props;
 
   const card = (
     <div>
@@ -20,7 +20,7 @@ const PokemonCard = (props) => {
         <li>Special Attack: {stats?.specialAttack}</li>
         <li>Special Defense: {stats?.specialDefense}</li>
       </ul>
-      <button onClick={() => fetchEvolution({ id: pokemon.id })}>
+      <button onClick={() => requestEvolution({ id: pokemon.id })}>
         Get Evolution
       </button>
     </div>

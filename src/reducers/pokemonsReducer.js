@@ -7,29 +7,30 @@ const REQUEST_POKEMON_ERROR = "REQUEST_POKEMON_ERROR";
 const initialState = {
   pokemons: [],
   stats: [],
-  loading: false,
-  error: false,
+  isLoading: false,
+  isError: false,
   errorMessage: "",
 };
 
 export const pokemonsReducer = (state = initialState, action) => {
   switch (action.type) {
     case REQUEST_POKEMON:
-      return { ...state, loading: true, error: false };
+      return { ...state, isLoading: true, isError: false, errorMessage: "" };
     case REQUEST_POKEMON_SUCCEEDED:
       return {
         ...state,
         pokemons: [...state.pokemons, action.payload],
-        loading: false,
-        error: false,
+        isLoading: false,
+        isError: false,
+        errorMessage: "",
       };
     case RESET_POKEMON:
       return {
         ...state,
         pokemons: [],
         stats: [],
-        loading: false,
-        error: false,
+        isLoading: false,
+        isError: false,
         errorMessage: "",
       };
     case REQUEST_POKEMON_STATS:
@@ -37,8 +38,8 @@ export const pokemonsReducer = (state = initialState, action) => {
     case REQUEST_POKEMON_ERROR:
       return {
         ...state,
-        loading: false,
-        error: true,
+        isLoading: false,
+        isError: true,
         errorMessage: action.payload,
       };
     default:

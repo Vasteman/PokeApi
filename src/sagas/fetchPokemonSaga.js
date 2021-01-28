@@ -58,7 +58,6 @@ export function* fetchPokemonsSaga({ payload }) {
     yield put(requestPokemonSucceeded(data));
     yield put(requestPokemonStats(stats));
   } catch (error) {
-    console.log("message", error.message);
     yield put(requestPokemonError(error.message));
   }
 }

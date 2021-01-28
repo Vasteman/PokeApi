@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import PokemonCardContainer from "./PokemonContainer";
-import { fetchEvolution } from "../../reducers/evolutionPokemonsReducer";
-import { fetchNextEvolution } from "../../reducers/evolutionPokemonsReducer";
+import { requestEvolution } from "../../reducers/evolutionPokemonsReducer";
+import { requestNextEvolution } from "../../reducers/evolutionPokemonsReducer";
 
 let mapStateToProps = (state) => {
   return {
@@ -15,8 +15,8 @@ let mapStateToProps = (state) => {
 };
 
 let mapDispatchToProps = {
-  fetchEvolution,
-  fetchNextEvolution,
+  requestEvolution,
+  requestNextEvolution,
 };
 
 export default connect(

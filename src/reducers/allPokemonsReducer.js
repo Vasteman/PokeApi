@@ -1,25 +1,31 @@
-export const REQUEST_ALL_POKEMONS = "FETCH_ALL_POKEMONS";
+export const REQUEST_ALL_POKEMONS = "REQUEST_ALL_POKEMONS";
 const REQUEST_ALL_POKEMONS_ERROR = "REQUEST_ALL_POKEMONS_ERROR";
-const REQUEST_ALL_POKEMONS_SUCCEEDED = "SET_ALL_POKEMONS_SUCCEEDED";
+const REQUEST_ALL_POKEMONS_SUCCEEDED = "REQUEST_ALL_POKEMONS_SUCCEEDED";
 
 const initialState = {
   allPoke: [],
-  loading: false,
-  error: false,
+  isLoading: false,
+  isError: false,
   errorMessage: "",
 };
 
 export function allPokemonsReducer(state = initialState, action) {
   switch (action.type) {
     case REQUEST_ALL_POKEMONS:
-      return { ...state, loading: true, error: false };
+      return { ...state, isLoading: true, isError: false, errorMessage: "" };
     case REQUEST_ALL_POKEMONS_SUCCEEDED:
-      return { ...state, allPoke: [...state.allPoke, action.payload] };
+      return {
+        ...state,
+        allPoke: [...state.allPoke, action.payload],
+        isLoading: false,
+        isError: false,
+        errorMessage: "",
+      };
     case REQUEST_ALL_POKEMONS_ERROR:
       return {
         ...state,
-        loading: false,
-        error: true,
+        isLoading: false,
+        isError: true,
         errorMessage: action.payload,
       };
     default:
