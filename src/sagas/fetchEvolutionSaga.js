@@ -19,7 +19,6 @@ export function* evolutionSaga({ payload }) {
     yield put(requestEvolutionError(error.message));
   }
 }
-
 export function* nextEvolutionSaga({ payload }) {
   try {
     const data = yield call(getPokemon, payload.id + 1);

@@ -20,9 +20,11 @@ const PokemonCard = (props) => {
         <li>Special Attack: {stats?.specialAttack}</li>
         <li>Special Defense: {stats?.specialDefense}</li>
       </ul>
-      <button onClick={() => requestEvolution({ id: pokemon.id })}>
-        Get Evolution
-      </button>
+      {requestEvolution && (
+        <button onClick={() => requestEvolution({ id: pokemon.id })}>
+          Get Evolution
+        </button>
+      )}
     </div>
   );
 
