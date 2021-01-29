@@ -1,44 +1,41 @@
+import produce from "immer";
+import { createAction, handleActions } from "redux-actions";
+
 export const REQUEST_ALL_POKEMONS = "REQUEST_ALL_POKEMONS";
 const REQUEST_ALL_POKEMONS_ERROR = "REQUEST_ALL_POKEMONS_ERROR";
 const REQUEST_ALL_POKEMONS_SUCCEEDED = "REQUEST_ALL_POKEMONS_SUCCEEDED";
 
-const initialState = {
+export const requestAllPokemons = createAction(REQUEST_ALL_POKEMONS);
+export const requestAllPokemonsSucceeded = createAction(
+  REQUEST_ALL_POKEMONS_SUCCEEDED
+);
+export const requestAllPokemonsError = createAction(REQUEST_ALL_POKEMONS_ERROR);
+
+const defaultState = {
   allPoke: [],
   isLoading: false,
   isError: false,
   errorMessage: "",
 };
 
-export function allPokemonsReducer(state = initialState, action) {
-  switch (action.type) {
-    case REQUEST_ALL_POKEMONS:
-      return { ...state, isLoading: true, isError: false, errorMessage: "" };
-    case REQUEST_ALL_POKEMONS_SUCCEEDED:
-      return {
-        ...state,
-        allPoke: [...state.allPoke, action.payload],
-        isLoading: false,
-        isError: false,
-        errorMessage: "",
-      };
-    case REQUEST_ALL_POKEMONS_ERROR:
-      return {
-        ...state,
-        isLoading: false,
-        isError: true,
-        errorMessage: action.payload,
-      };
-    default:
-      return state;
-  }
-}
-
-export const requestAllPokemons = () => ({ type: REQUEST_ALL_POKEMONS });
-export const requestAllPokemonsSucceeded = (payload) => ({
-  type: REQUEST_ALL_POKEMONS_SUCCEEDED,
-  payload,
-});
-export const requestAllPokemonsError = (payload) => ({
-  type: REQUEST_ALL_POKEMONS_ERROR,
-  payload,
-});
+export const allPokemonsReducer = handleActions(
+  {
+    [REQUEST_ALL_POKEMONS]: produce((state) => {
+      state.isLoading = true;
+      state.isError = false;
+      state.errorMessage = "";
+    }),
+    [REQUEST_ALL_POKEMONS_SUCCEEDED]: produce((state, { payload }) => {
+      state.isLoading = false;
+      state.isError = false;
+      state.errorMessage = "";
+      state.allPoke = [...state.allPoke, payload];
+    }),
+    [REQUEST_ALL_POKEMONS_ERROR]: produce((state, { payload }) => {
+      state.isLoading = false;
+      state.isError = true;
+      state.errorMessage = payload;
+    }),
+  },
+  defaultState
+);
