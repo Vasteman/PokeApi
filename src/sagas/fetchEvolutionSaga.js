@@ -1,30 +1,31 @@
-import { put,takeEvery,call} from 'redux-saga/effects';
-import { getPokemon,getPokemonStats } from './fetchPokemonSaga';
-import { FETCH_EVOLUTION,
-         FETCH_NEXT_EVOLUTION, 
-         setEvolution, 
-         setEvolutionStats, 
-         setNextEvolution,
-         setNextEvolutionStats } from '../reducers/evolutionPokemonsReducer';
+import { put, call } from "redux-saga/effects";
+import { getPokemon, getPokemonStats } from "../utils/GetPokemons";
+import {
+  setEvolution,
+  setEvolutionStats,
+  setNextEvolution,
+  setNextEvolutionStats,
+  requestEvolutionError,
+  requestNextEvolutionError,
+} from "../reducers/evolutionPokemonsReducer";
 
-
-
-function* evolutionWorker({ payload }) {
-  const data = yield call(getPokemon,payload.id+1)
-  const stats = yield call(getPokemonStats,payload.id+1)
-  yield put(setEvolution(data))
-  yield put(setEvolutionStats(stats))
+export function* evolutionSaga({ payload }) {
+  try {
+    const data = yield call(getPokemon, payload.id + 1);
+    const stats = yield call(getPokemonStats, payload.id + 1);
+    yield put(setEvolution(data));
+    yield put(setEvolutionStats(stats));
+  } catch (error) {
+    yield put(requestEvolutionError(error.message));
+  }
 }
-
-function* nextEvolutionWorker({ payload }) {
-  const data = yield call(getPokemon,payload.id+2)
-  const stats = yield call(getPokemonStats,payload.id+2)
-  yield put(setNextEvolution(data))
-  yield put(setNextEvolutionStats(stats))
-}
-
-
-export function* evolutionWatcher() {
-  yield takeEvery(FETCH_EVOLUTION, evolutionWorker);
-  yield takeEvery(FETCH_NEXT_EVOLUTION,nextEvolutionWorker);
+export function* nextEvolutionSaga({ payload }) {
+  try {
+    const data = yield call(getPokemon, payload.id + 1);
+    const stats = yield call(getPokemonStats, payload.id + 1);
+    yield put(setNextEvolution(data));
+    yield put(setNextEvolutionStats(stats));
+  } catch (error) {
+    yield put(requestNextEvolutionError(error.message));
+  }
 }

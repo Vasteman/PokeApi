@@ -1,17 +1,41 @@
-export const FETCH_ALL_POKEMONS = 'FETCH_ALL_POKEMONS';
-const SET_ALL_POKEMONS = 'SET_ALL_POKEMONS';
+import produce from "immer";
+import { createAction, handleActions } from "redux-actions";
 
-const initialState = {
-  allPoke: []
-}
+export const REQUEST_ALL_POKEMONS = "REQUEST_ALL_POKEMONS";
+const REQUEST_ALL_POKEMONS_ERROR = "REQUEST_ALL_POKEMONS_ERROR";
+const REQUEST_ALL_POKEMONS_SUCCEEDED = "REQUEST_ALL_POKEMONS_SUCCEEDED";
 
-export function allPokemonsReducer (state = initialState, action) {
-  switch(action.type){
-    case SET_ALL_POKEMONS:
-      return {...state, allPoke: [...state.allPoke,action.payload]}
-    default: return state;
-  }
-}
+export const requestAllPokemons = createAction(REQUEST_ALL_POKEMONS);
+export const requestAllPokemonsSucceeded = createAction(
+  REQUEST_ALL_POKEMONS_SUCCEEDED
+);
+export const requestAllPokemonsError = createAction(REQUEST_ALL_POKEMONS_ERROR);
 
-export const fetchAllPokemons = () => ({ type: FETCH_ALL_POKEMONS });
-export const setAllPokemons = (payload) => ({ type: SET_ALL_POKEMONS, payload })
+const defaultState = {
+  allPoke: [],
+  isLoading: false,
+  isError: false,
+  errorMessage: "",
+};
+
+export const allPokemonsReducer = handleActions(
+  {
+    [REQUEST_ALL_POKEMONS]: produce((state) => {
+      state.isLoading = true;
+      state.isError = false;
+      state.errorMessage = "";
+    }),
+    [REQUEST_ALL_POKEMONS_SUCCEEDED]: produce((state, { payload }) => {
+      state.isLoading = false;
+      state.isError = false;
+      state.errorMessage = "";
+      state.allPoke = [...state.allPoke, payload];
+    }),
+    [REQUEST_ALL_POKEMONS_ERROR]: produce((state, { payload }) => {
+      state.isLoading = false;
+      state.isError = true;
+      state.errorMessage = payload;
+    }),
+  },
+  defaultState
+);
